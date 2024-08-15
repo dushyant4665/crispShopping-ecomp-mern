@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 require('dotenv').config();
-const port = process.env.port || 8000
+const port = process.env.port 
 const Stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 

@@ -1,1 +1,0 @@
-# crisp-ecomp-project-full-stck
