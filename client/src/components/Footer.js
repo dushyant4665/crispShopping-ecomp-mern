@@ -17,15 +17,19 @@ const Footer = () => {
         }
     
         try {
-            const response = await fetch('http://localhost:5000/subscribe', {  // Make sure the port matches
+            console.log('Email:', email);  // Debugging email value
+            
+            const response = await fetch('http://localhost:8000/subscribe', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ email }),
             });
-    
-            if (!response.ok) {
+            
+            console.log('Response:', response);  // Debugging server response
+            
+            if (!response) {
                 throw new Error('Failed to subscribe');
             }
     

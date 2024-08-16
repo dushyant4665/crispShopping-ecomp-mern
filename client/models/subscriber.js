@@ -1,3 +1,5 @@
+// models/Subscriber.js
+
 const mongoose = require('mongoose');
 
 const subscriberSchema = new mongoose.Schema({
@@ -11,4 +13,3 @@ const subscriberSchema = new mongoose.Schema({
 const Subscriber = mongoose.model('Subscriber', subscriberSchema);
 
 module.exports = Subscriber;
-

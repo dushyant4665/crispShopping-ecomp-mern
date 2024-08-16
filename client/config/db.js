@@ -1,30 +1,51 @@
-// config/Db.js
+// require('dotenv').config();
 
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+
+// const uri = process.env.MONGO_URI;
+
+// console.log('MONGODB_URI:', uri);
+
+// if (!uri) {
+//     throw new Error('MongoDB URI not defined in .env file');
+// }
+
+// const connectToDatabase = async () => {
+//     try {
+//         const connection = await mongoose.connect(uri, {
+//             useNewUrlParser: true,
+//             useUnifiedTopology: true,
+//         });
+//         console.log(`Connected to MongoDB at ${connection.connection.host}`);
+//     } catch (error) {
+//         console.error('Failed to connect to MongoDB:', error);
+//         process.exit(1);
+//     }
+// };
+// module.exports = { connectToDatabase };
+
+
+
+
 require('dotenv').config();
+const mongoose = require('mongoose');
 
-// Get MongoDB URI from environment variables
 const uri = process.env.MONGODB_URI;
 
-// Log the MongoDB URI for debugging (ensure this doesn't expose sensitive information in production)
+const cors = require('cors');
+app.use(cors());  // This should already be in your dbserver.js
+
 console.log('MONGODB_URI:', uri);
 
-// Check if the URI is defined
 if (!uri) {
     throw new Error('MONGODB_URI environment variable not defined');
 }
 
-// Function to connect to the MongoDB database
 const connectToDatabase = async () => {
     try {
-        // Connect to MongoDB using Mongoose
-        const connection = await mongoose.connect(uri, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
+        const connection = await mongoose.connect(uri);
         console.log(`Connected to MongoDB at ${connection.connection.host}`);
     } catch (error) {
-        // Log any connection errors and exit the process
         console.error('Failed to connect to MongoDB:', error);
         process.exit(1);
     }
