@@ -10,11 +10,8 @@ import CartItems from '../components/CartItems';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 import StripeCheckout from 'react-stripe-checkout';
-import { store } from 'react-notifications-component';
-import 'react-notifications-component/dist/theme.css';
 import { Store } from 'react-notifications-component';
-
-
+import 'react-notifications-component/dist/theme.css';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -25,11 +22,11 @@ const Cart = () => {
     Store.addNotification({
       title: "Proceeding to Checkout",
       message: "You are being redirected to the payment gateway.",
-      type: "success", // 'default', 'success', 'info', 'warning'
+      type: "success",
       insert: "top",
-      container: "top-right", // where to position the notification
+      container: "top-right",
       animationIn: ["animate__animated", "animate__fadeIn"], 
-      container: 'top-right',// animation classes from animate.css
+      container: 'top-right',
       animationOut: ["animate__animated", "animate__fadeOut"],
       dismiss: {
         duration: 5000,
@@ -119,6 +116,7 @@ const Cart = () => {
                           label="Pay to Crisp"
                           description={`Your payment amount is ${totalAmt}`}
                           email={userInfo.email}
+                          onClick={proceedToCheckOut}
                         />
                       </div>
                     )}
