@@ -11,25 +11,26 @@ const Footer = () => {
     };
 
     const handleSubscribe = async () => {
+       
+            
+    console.log('MONGODB_URI:', process.env.MONGODB_URI);
+
         if (!isValidEmail(email)) {
             toast.error('Invalid email address');
             return;
         }
     
         try {
-            console.log('Email:', email);  // Debugging email value
-            
             const response = await fetch('http://localhost:8000/subscribe', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ email }),
-            });
+            })
             
-            console.log('Response:', response);  // Debugging server response
-            
-            if (!response) {
+    
+            if (!response.ok) {  
                 throw new Error('Failed to subscribe');
             }
     
