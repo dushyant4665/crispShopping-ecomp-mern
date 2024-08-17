@@ -1,41 +1,27 @@
 
+require('dotenv').config(); //This Load environment variables
 
-require('dotenv').config();
-const mongoose = require('mongoose');
 const express = require('express');
-const { connectToDatabase } = require('./config/db');
-
-
-
+const { connectToDatabase } = require('./config/db.js');
+const Subscriber = require('./models/Subscriber');
+const cors = require('cors');
 
 const app = express();
-const cors = require('cors');
-app.use(cors()); 
-
-
 
 app.use(express.json());
+app.use(cors());
 
-// database
 connectToDatabase();
-process.env.MONGODB_URI
-// Define routes here
+
 app.post('/subscribe', async (req, res) => {
     const { email } = req.body;
+
     if (!email) {
         return res.status(400).json({ error: 'Email is required' });
     }
 
-
     try {
-        // subscriber schema and model
-        const subscriberSchema = new mongoose.Schema({
-            email: { type: String, required: true },
-        });
-
-        const Subscriber = mongoose.model('Subscriber', subscriberSchema);
-
-        // Save the email to the database
+        // That Save email to the database using the existing Subscriber model
         const subscriber = new Subscriber({ email });
         await subscriber.save();
 
@@ -45,7 +31,7 @@ app.post('/subscribe', async (req, res) => {
     }
 });
 
-const PORT = process.env.PORT||8000 ;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
