@@ -1,9 +1,10 @@
 
-require('dotenv').config(); //This Load environment variables
+require('dotenv').config({ path: './.env' });           // Load from client .env
+require('dotenv').config({ path: '../server/.env' });   // Load from server .env
 
 const express = require('express');
 const { connectToDatabase } = require('./config/db.js');
-const Subscriber = require('./models/Subscriber');
+const Subscriber = require('./models/Subscriber.js');
 const cors = require('cors');
 
 const app = express();
@@ -11,6 +12,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+// Connect to the database
 connectToDatabase();
 
 app.post('/subscribe', async (req, res) => {
@@ -21,7 +23,7 @@ app.post('/subscribe', async (req, res) => {
     }
 
     try {
-        // That Save email to the database using the existing Subscriber model
+        // Save the email to the database using the existing Subscriber model
         const subscriber = new Subscriber({ email });
         await subscriber.save();
 
