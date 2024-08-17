@@ -6,11 +6,11 @@ const express = require('express');
 const { connectToDatabase } = require('./config/db.js');
 const Subscriber = require('./models/Subscriber.js');
 const cors = require('cors');
-
 const app = express();
 
 app.use(express.json());
 app.use(cors());
+
 
 // Connect to the database
 connectToDatabase();
