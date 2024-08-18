@@ -46,7 +46,6 @@
 // });
 
 
-
 require('dotenv').config({ path: './.env' });           // Load from client .env
 require('dotenv').config({ path: '../server/.env' });   // Load from server .env
 
@@ -60,15 +59,16 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost:8002'
+    origin: 'http://localhost:8002' // Adjust this if your frontend runs on a different port
 }));
 
 // Connect to the database
 connectToDatabase();
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'build')));
 
+// API endpoint
 app.post('/subscribe', async (req, res) => {
     const { email } = req.body;
 
@@ -86,11 +86,12 @@ app.post('/subscribe', async (req, res) => {
     }
 });
 
-// The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
+// Serve React app for all other routes
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 const PORT = process.env.PORT || 8000;
-app
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
