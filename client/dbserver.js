@@ -53,7 +53,7 @@ require('dotenv').config({ path: '../server/.env' });   // Load from server .env
 
 const express = require('express');
 const { connectToDatabase } = require('./config/db.js');
-const Subscriber = require('./models/Subscriber.js');
+const Subscriber = require('../models/Subscriber');
 const cors = require('cors');
 
 const app = express();
