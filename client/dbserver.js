@@ -60,7 +60,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-    // origin: 'http://localhost:8002'
+    origin: 'http://localhost:8002'
 }));
 
 // Connect to the database
