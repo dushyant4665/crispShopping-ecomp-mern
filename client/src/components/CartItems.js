@@ -1,7 +1,7 @@
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import { useSelector, useDispatch } from 'react-redux';
-import { useState } from "react";
-import { ImCross } from "react-icons/im";
+// import { useState } from "react";
+// import { ImCross } from "react-icons/im";
 import { MdOutlineClose } from 'react-icons/md';
 import { HiOutlineArrowLeft } from 'react-icons/hi';
 import { ToastContainer, toast } from 'react-toastify';
