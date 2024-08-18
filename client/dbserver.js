@@ -66,7 +66,7 @@ app.use(cors({
 // Connect to the database
 connectToDatabase();
 
-app.get('/', (req, res) => {
+app.get('http://localhost:8002/', (req, res) => {
     res.send('Server is running!');
 });
 
