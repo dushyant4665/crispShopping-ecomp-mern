@@ -2,31 +2,32 @@
   "version": 2,
   "builds": [
     {
+      "src": "client/dbserver.js",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["client/models/**", "client/config/**"]
+      }
+    },
+    {
       "src": "client/package.json",
       "use": "@vercel/static-build",
       "config": {
         "distDir": "client/build"
-      }
-    },
-    {
-      "src": "server/package.json",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": [
-          "server/**/*",
-          "client/build/**/*"
-        ]
       }
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/server/index.js"
+      "dest": "/client/dbserver.js"
     },
     {
       "src": "/(.*)",
       "dest": "/client/build/$1"
     }
-  ]
+  ],
+  "env": {
+    "MONGODB_URI": "@mongodb_uri",
+    "PORT": "8000"
+  }
 }
