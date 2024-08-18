@@ -60,7 +60,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost:3000',  // Aap apne frontend ka URL yahan dal sakte hain
+    origin: 'http://localhost:8002',  // Aap apne frontend ka URL yahan dal sakte hain
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
     credentials: true,  // (Optional) Agar aap credentials allow karna chahte hain
