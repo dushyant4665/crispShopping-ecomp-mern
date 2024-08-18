@@ -12,10 +12,12 @@ if (!uri) {
 
 const connectToDatabase = async () => {
     try {
-        const connection = await mongoose.connect(uri, {
+        const connection = await  
+            mongoose.connect(process.env.MONGODB_URI)
+            // mongoose.connect(uri, {
             // useNewUrlParser: true, // This is deprecated
             // useUnifiedTopology: true, // This is also deprecated
-        });
+        // });
         console.log(`Connected to MongoDB at ${connection.connection.host}`);
     } catch (error) {
         console.error('Failed to connect to MongoDB:', error);
