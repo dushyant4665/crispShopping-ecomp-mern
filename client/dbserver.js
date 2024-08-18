@@ -1,39 +1,27 @@
-
-require('dotenv').config({ path: './.env' });           // Load from client .env
-require('dotenv').config({ path: '../server/.env' });   // Load from server .env
-
-const express = require('express');
-const { connectToDatabase } = require('./config/db.js');
-const Subscriber = require('./models/subscriber');
-const cors = require('cors');
-const app = express();
-
-app.use(express.json());
-app.use(cors());
+require('dotenv').config();
+const mongoose = require('mongoose');
 
 
-// Connect to the database
-connectToDatabase();
+const uri = process.env.MONGODB_URI;
 
-app.post('/subscribe', async (req, res) => {
-    const { email } = req.body;
+console.log('MONGODB_URI:', uri);
 
-    if (!email) {
-        return res.status(400).json({ error: 'Email is required' });
-    }
+if (!uri) {
+    throw new Error('MONGODB_URI environment variable not defined');
+}
 
+const connectToDatabase = async () => {
     try {
-        // Save the email to the database using the existing Subscriber model
-        const subscriber = new Subscriber({ email });
-        await subscriber.save();
-
-        res.status(200).json({ message: 'Subscribed successfully' });
+        const connection = await mongoose.connect(uri, {
+            // useNewUrlParser: true, // This is deprecated
+            // useUnifiedTopology: true, // This is also deprecated
+        });
+        console.log(`Connected to MongoDB at ${connection.connection.host}`);
     } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
+        console.error('Failed to connect to MongoDB:', error);
+        process.exit(1);
     }
-});
+};
 
-const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+// Export the connectToDatabase function
+module.exports = { connectToDatabase };
