@@ -59,7 +59,13 @@ const cors = require('cors');
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000',  // Aap apne frontend ka URL yahan dal sakte hain
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type'],
+    credentials: true,  // (Optional) Agar aap credentials allow karna chahte hain
+}));
+
 
 // Connect to the database
 connectToDatabase();
