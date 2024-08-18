@@ -64,7 +64,7 @@ app.use(cors());
 // Connect to the database
 connectToDatabase();
 
-app.post('/subscribe', async (req, res) => {
+app.post('/', async (req, res) => {
     const { email } = req.body;
 
     if (!email) {
