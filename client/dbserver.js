@@ -60,17 +60,17 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost:8002',  // Aap apne frontend ka URL yahan dal sakte hain
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type'],
-    credentials: true,  // (Optional) Agar aap credentials allow karna chahte hain
+    origin: 'http://localhost:8002'
 }));
-
 
 // Connect to the database
 connectToDatabase();
 
-app.post('/subscriber', async (req, res) => {
+app.get('/', (req, res) => {
+    res.send('Server is running!');
+});
+
+app.post('/subscribe', async (req, res) => {
     const { email } = req.body;
 
     if (!email) {
@@ -78,7 +78,6 @@ app.post('/subscriber', async (req, res) => {
     }
 
     try {
-        // Save the email to the database using the existing Subscriber model
         const subscriber = new Subscriber({ email });
         await subscriber.save();
 
@@ -92,3 +91,4 @@ const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
