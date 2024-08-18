@@ -1,27 +1,39 @@
-require('dotenv').config();
-const mongoose = require('mongoose');
 
+require('dotenv').config({ path: './.env' });           // Load from client .env
+require('dotenv').config({ path: '../server/.env' });   // Load from server .env
 
-const uri = process.env.MONGODB_URI;
+const express = require('express');
+const { connectToDatabase } = require('./config/db.js');
+const Subscriber = require('./models/Subscriber.js');
+const cors = require('cors');
 
-console.log('MONGODB_URI:', uri);
+const app = express();
 
-if (!uri) {
-    throw new Error('MONGODB_URI environment variable not defined');
-}
+app.use(express.json());
+app.use(cors());
 
-const connectToDatabase = async () => {
-    try {
-        const connection = await mongoose.connect(uri, {
-            // useNewUrlParser: true, // This is deprecated
-            // useUnifiedTopology: true, // This is also deprecated
-        });
-        console.log(`Connected to MongoDB at ${connection.connection.host}`);
-    } catch (error) {
-        console.error('Failed to connect to MongoDB:', error);
-        process.exit(1);
+// Connect to the database
+connectToDatabase();
+
+app.post('/subscribe', async (req, res) => {
+    const { email } = req.body;
+
+    if (!email) {
+        return res.status(400).json({ error: 'Email is required' });
     }
-};
 
-// Export the connectToDatabase function
-module.exports = { connectToDatabase };
+    try {
+        // Save the email to the database using the existing Subscriber model
+        const subscriber = new Subscriber({ email });
+        await subscriber.save();
+
+        res.status(200).json({ message: 'Subscribed successfully' });
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
