@@ -50,25 +50,20 @@ require('dotenv').config({ path: './.env' });           // Load from client .env
 require('dotenv').config({ path: '../server/.env' });   // Load from server .env
 
 const express = require('express');
-const path = require('path');
-const { connectToDatabase } = require('./config/db.js');
-const Subscriber = require('./models/subscriber');
+const { connectToDatabase } = require('../client/config/db.js');
+const Subscriber = require('../client/models/subscriber.js');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 
 app.use(express.json());
-app.use(cors({
-    origin: 'http://localhost:8002' // Adjust this if your frontend runs on a different port
-}));
+app.use(cors());
 
 // Connect to the database
 connectToDatabase();
-
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'build')));
-
-// API endpoint
+app.use(express.static(path.join(__dirname, 'client/build')));
 app.post('/subscribe', async (req, res) => {
     const { email } = req.body;
 
@@ -77,6 +72,7 @@ app.post('/subscribe', async (req, res) => {
     }
 
     try {
+        // Save the email to the database using the existing Subscriber model
         const subscriber = new Subscriber({ email });
         await subscriber.save();
 
@@ -86,9 +82,10 @@ app.post('/subscribe', async (req, res) => {
     }
 });
 
-// Serve React app for all other routes
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
 
 const PORT = process.env.PORT || 8000;
