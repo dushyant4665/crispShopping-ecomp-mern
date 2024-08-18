@@ -50,8 +50,8 @@ require('dotenv').config({ path: './.env' });           // Load from client .env
 require('dotenv').config({ path: '../server/.env' });   // Load from server .env
 
 const express = require('express');
-const { connectToDatabase } = require('../client/config/db.js');
-const Subscriber = require('../client/models/subscriber.js');
+const { connectToDatabase } = require('./config/db.js');  // Path relative to the client folder
+const Subscriber = require('./models/subscriber.js');  
 const cors = require('cors');
 const path = require('path');
 
