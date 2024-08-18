@@ -60,15 +60,14 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost:8002'
+    // origin: 'http://localhost:8002'
 }));
 
 // Connect to the database
 connectToDatabase();
 
-app.get('http://localhost:8002/', (req, res) => {
-    res.send('Server is running!');
-});
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.post('/subscribe', async (req, res) => {
     const { email } = req.body;
@@ -85,6 +84,10 @@ app.post('/subscribe', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: 'Internal Server Error' });
     }
+});
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + './build/index.html'));
 });
 
 const PORT = process.env.PORT || 8000;
