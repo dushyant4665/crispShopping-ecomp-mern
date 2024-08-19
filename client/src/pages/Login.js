@@ -138,8 +138,7 @@ const Login = () => {
 
                 setTimeout(() => {
                     navigate('/');
-                }, 1500);
-
+                }, 1000);
                 toast.success('Successfully Signed In');
             })
             .catch((error) => {
