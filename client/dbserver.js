@@ -111,7 +111,7 @@ app.listen(PORT, () => {
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
 app.get('https://crisp-shopping-ecom-mern-6lo5qa2v4-dushyant4665s-projects.vercel.app/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client/build/index.html'));
+    res.sendFile(path.join(__dirname, './build/index.html'));
 });
 
 const PORT = process.env.PORT || 8000;
