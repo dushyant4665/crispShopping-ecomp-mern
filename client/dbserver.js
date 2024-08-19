@@ -45,8 +45,85 @@
 //     }
 // });
 
-require('dotenv').config({ path: './client/.env' });           // Load from client .env
-require('dotenv').config({ path: './server/.env' });   // Load from server .env
+// require('dotenv').config({ path: './client/.env' });           // Load from client .env
+// require('dotenv').config({ path: './server/.env' });   // Load from server .env
+
+// const express = require('express');
+// const { connectToDatabase } = require('./config/db.js');
+// const Subscriber = require('./models/subscriber.js');
+// const cors = require('cors');
+// const path = require('path');
+
+// const app = express();
+
+// app.use(express.json());
+// // app.use(cors());
+// // app.use(cors({
+//     // origin: '*',  // Allow all origins, or specify the domain if needed
+//     // methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//     // allowedHeaders: ['Content-Type', 'Authorization']
+// // }));
+// app.use(cors({ origin: 'https://crisp-shopping-ecom-mern-6lo5qa2v4-dushyant4665s-projects.vercel.app/' }));
+
+// // Connect to the database
+// connectToDatabase();
+
+// // Serve static files from the React app
+// app.use(express.static(path.join(__dirname, './build')));
+
+// app.post('/subscribe', async (req, res) => {
+//     const { email } = req.body;
+
+//     if (!email) {
+//         return res.status(400).json({ error: 'Email is required' });
+//     }
+
+//     try {
+//         const subscriber = new Subscriber({ email });
+//         await subscriber.save();
+//         res.status(200).json({ message: 'Subscribed successfully' });
+//     } catch (error) {
+//         res.status(500).json({ error: 'Internal Server Error' });
+//     }
+// });
+
+// // The "catchall" handler: for any request that doesn't
+// // match one above, send back React's index.html file.
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, './build/index.html'));
+// });
+
+// const PORT = process.env.PORT || 8000;
+// app.listen(PORT, () => {
+//     console.log(`Server running on port ${PORT}`);
+// });
+
+
+//     try {
+//         const subscriber = new Subscriber({ email });
+//         await subscriber.save();
+//         res.status(200).json({ message: 'Subscribed successfully' });
+//     } catch (error) {
+//         res.status(500).json({ error: 'Internal Server Error' });
+//     }
+// });
+
+// // The "catchall" handler: for any request that doesn't
+// // match one above, send back React's index.html file.
+// app.get('https://crisp-shopping-ecom-mern-6lo5qa2v4-dushyant4665s-projects.vercel.app/', (req, res) => {
+//     res.sendFile(path.join(__dirname, './build/index.html'));
+// });
+
+// const PORT = process.env.PORT || 8000;
+// app.listen(PORT, () => {
+//     console.log(`Server running on port ${PORT}`);
+// });
+
+
+
+
+require('dotenv').config({ path: './client/.env' }); // Load from client .env
+require('dotenv').config({ path: './server/.env' }); // Load from server .env
 
 const express = require('express');
 const { connectToDatabase } = require('./config/db.js');
@@ -57,20 +134,21 @@ const path = require('path');
 const app = express();
 
 app.use(express.json());
-// app.use(cors());
-// app.use(cors({
-    // origin: '*',  // Allow all origins, or specify the domain if needed
-    // methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    // allowedHeaders: ['Content-Type', 'Authorization']
-// }));
-app.use(cors({ origin: 'https://crisp-shopping-ecom-mern-6lo5qa2v4-dushyant4665s-projects.vercel.app/' }));
+
+// CORS Configuration
+app.use(cors({
+    origin: 'https://crisp-shopping-ecom-mern.vercel.app', // Update this to match your Vercel URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Connect to the database
 connectToDatabase();
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, './build')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
+// Subscription endpoint
 app.post('/subscribe', async (req, res) => {
     const { email } = req.body;
 
@@ -87,33 +165,12 @@ app.post('/subscribe', async (req, res) => {
     }
 });
 
-// The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
+// Catchall handler: Send back React's index.html file
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, './build/index.html'));
+    res.sendFile(path.join(__dirname, 'client/build/index.html'));
 });
 
-const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
-
-
-    try {
-        const subscriber = new Subscriber({ email });
-        await subscriber.save();
-        res.status(200).json({ message: 'Subscribed successfully' });
-    } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
-
-// The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
-app.get('https://crisp-shopping-ecom-mern-6lo5qa2v4-dushyant4665s-projects.vercel.app/', (req, res) => {
-    res.sendFile(path.join(__dirname, './build/index.html'));
-});
-
+// Start the server
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
