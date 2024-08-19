@@ -1,5 +1,4 @@
 
-
 {
   "version": 2,
   "builds": [
@@ -8,18 +7,21 @@
       "use": "@vercel/node"
     },
     {
-      "src": "client/package.json",
-      "use": "@vercel/static-build"
+      "src": "client/build/**/*",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/subscribe",
-      "dest": "client/dbserver.js"
+      "src": "/api/(.*)",
+      "dest": "/client/dbserver.js"
     },
     {
       "src": "/(.*)",
-      "dest": "client/build/$1"
+      "dest": "/client/build/$1"
     }
-  ]
+  ],
+  "env": {
+    "MONGODB_URI": "MONGODB_URI"
+  }
 }
