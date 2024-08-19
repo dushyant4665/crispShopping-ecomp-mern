@@ -49,8 +49,8 @@ require('dotenv').config({ path: './client/.env' });           // Load from clie
 require('dotenv').config({ path: './server/.env' });   // Load from server .env
 
 const express = require('express');
-const { connectToDatabase } = require('./client/config/db.js');
-const Subscriber = require('./client/models/subscriber.js');
+const { connectToDatabase } = require('./config/db.js');
+const Subscriber = require('./models/subscriber.js');
 const cors = require('cors');
 const path = require('path');
 
@@ -63,7 +63,7 @@ app.use(cors());
 connectToDatabase();
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, './build')));
 
 app.post('/subscribe', async (req, res) => {
     const { email } = req.body;
@@ -71,6 +71,27 @@ app.post('/subscribe', async (req, res) => {
     if (!email) {
         return res.status(400).json({ error: 'Email is required' });
     }
+
+    try {
+        const subscriber = new Subscriber({ email });
+        await subscriber.save();
+        res.status(200).json({ message: 'Subscribed successfully' });
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/build/index.html'));
+});
+
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
+
 
     try {
         const subscriber = new Subscriber({ email });
