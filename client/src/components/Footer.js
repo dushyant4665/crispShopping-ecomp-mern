@@ -21,7 +21,7 @@ const Footer = () => {
         }
     
         try {
-            const response = await fetch('http://localhost:8000/subscribe', {
+            const response = await fetch('/subscribe', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
