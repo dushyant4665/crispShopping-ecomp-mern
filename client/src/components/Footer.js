@@ -21,7 +21,7 @@ const Footer = () => {
         }
     
         try {
-            const response = await fetch('https://crisp-shopping-ecom-mern-fu92kjp2e-dushyant4665s-projects.vercel.app/subscribe', {
+            const response = await fetch('https://crisp-shopping-ecom-mern-9uk8vdqfo-dushyant4665s-projects.vercel.app/subscribe', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
