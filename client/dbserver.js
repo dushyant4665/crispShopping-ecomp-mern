@@ -89,7 +89,7 @@ app.post('/subscribe', async (req, res) => {
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
-app.get('*', (req, res) => {
+app.get('', (req, res) => {
     res.sendFile(path.join(__dirname, 'client/build/index.html'));
 });
 
@@ -110,7 +110,7 @@ app.listen(PORT, () => {
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
-app.get('*', (req, res) => {
+app.get('https://crisp-shopping-ecom-mern-6lo5qa2v4-dushyant4665s-projects.vercel.app/', (req, res) => {
     res.sendFile(path.join(__dirname, 'client/build/index.html'));
 });
 
