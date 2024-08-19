@@ -58,11 +58,12 @@ const app = express();
 
 app.use(express.json());
 // app.use(cors());
-app.use(cors({
-    origin: '*',  // Allow all origins, or specify the domain if needed
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-}));
+// app.use(cors({
+    // origin: '*',  // Allow all origins, or specify the domain if needed
+    // methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    // allowedHeaders: ['Content-Type', 'Authorization']
+// }));
+app.use(cors({ origin: 'https://crisp-shopping-ecom-mern-6lo5qa2v4-dushyant4665s-projects.vercel.app/' }));
 
 // Connect to the database
 connectToDatabase();
