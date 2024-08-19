@@ -137,7 +137,7 @@ app.use(express.json());
 
 // CORS Configuration
 app.use(cors({
-    origin: 'https://crisp-shopping-ecom-mern.vercel.app', // Update this to match your Vercel URL
+    origin: 'https://crisp-shopping-ecom-mern-9uk8vdqfo-dushyant4665s-projects.vercel.app/', // Update this to match your Vercel URL
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
