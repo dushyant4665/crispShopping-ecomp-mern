@@ -26,7 +26,7 @@ const Cart = () => {
       insert: "top",
       container: "top-right",
       animationIn: ["animate__animated", "animate__fadeIn"], 
-      container: 'top-right',
+      // container: 'top-right',
       animationOut: ["animate__animated", "animate__fadeOut"],
       dismiss: {
         duration: 5000,

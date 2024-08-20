@@ -19,7 +19,7 @@ const Login = () => {
             .then((result) => {
                 const user = result.user;
                 dispatch(addUser({
-                    id: user.id, // Changed from user.id to user.uid
+                    id: user.uid, // Changed from user.id to user.uid
                     name: user.displayName,
                     email: user.email,
                     image: user.photoURL,

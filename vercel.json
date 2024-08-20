@@ -1,10 +1,26 @@
 {
-    "version": 2,
-    "name": "music-album",
-    "builds": [
-       { "src": "app.js", "use": "@vercel/node" }
-    ],
-    "routes": [
-       { "src": "/(.*)", "dest": "/app.js" }
-    ]
+   "builds": [
+     {
+       "src": "client/package.json",
+       "use": "@vercel/static-build",
+       "config": {
+         "distDir": "client/build"
+       }
+     },
+     {
+       "src": "server/dbserver.js",
+       "use": "@vercel/node"
+     }
+   ],
+   "routes": [
+     {
+       "src": "/api/(.*)",
+       "dest": "/server/dbserver.js"
+     },
+     {
+       "src": "/(.*)",
+       "dest": "/client/build/$1"
+     }
+   ]
  }
+ 

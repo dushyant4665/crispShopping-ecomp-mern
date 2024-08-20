@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 require('dotenv').config();
-const port = process.env.port 
+const port = process.env.port ||6000
 const Stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 
@@ -26,6 +26,6 @@ app.post('/pay',async(req,res)=>{
     })
 })
 
-app.listen(8000,()=>{
-    console.log(`server is running on port ${8000}`);
+app.listen(6000,()=>{
+    console.log(`server is running on port ${6000}`);
 });
