@@ -32,7 +32,6 @@
 
 
 
-
 require('dotenv').config();
 const mongoose = require('mongoose');
 
@@ -48,8 +47,8 @@ if (!uri) {
 const connectToDatabase = async () => {
     try {
         const connection = await mongoose.connect(uri, {
-            // useNewUrlParser: true, // This is deprecated
-            // useUnifiedTopology: true, // This is also deprecated
+            useNewUrlParser: true, // This is deprecated
+            useUnifiedTopology: true, // This is also deprecated
         });
         console.log(`Connected to MongoDB at ${connection.connection.host}`);
     } catch (error) {
@@ -60,4 +59,3 @@ const connectToDatabase = async () => {
 
 // Export the connectToDatabase function
 module.exports = { connectToDatabase };
-
