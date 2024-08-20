@@ -122,34 +122,85 @@
 
 
 
-require('dotenv').config({ path: './.env' });           // Load from client .env
-require('dotenv').config({ path: '../server/.env' });   // Load from server .env
+// require('dotenv').config({ path: './.env' });           // Load from client .env
+// require('dotenv').config({ path: '../server/.env' });   // Load from server .env
+
+// const express = require('express');
+// const { connectToDatabase } = require('./config/db.js');  
+// const Subscriber = require('./models/subscriber.js');     
+
+// const cors = require('cors');
+// const path = require('path');
+
+// const app = express();
+
+// app.use(express.json());
+
+// // CORS Configuration
+// app.use(cors({
+//     origin: 'https://crisp-shopping-ecom-mern-9uk8vdqfo-dushyant4665s-projects.vercel.app/', // Update this to match your Vercel URL
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//     allowedHeaders: ['Content-Type', 'Authorization']
+// }));
+
+// // Connect to the database
+// connectToDatabase();
+
+// // Serve static files from the React app
+// app.use(express.static(path.join(__dirname, './build')));
+
+// // Subscription endpoint
+// app.post('/subscribe', async (req, res) => {
+//     const { email } = req.body;
+
+//     if (!email) {
+//         return res.status(400).json({ error: 'Email is required' });
+//     }
+
+//     try {
+//         const subscriber = new Subscriber({ email });
+//         await subscriber.save();
+//         res.status(200).json({ message: 'Subscribed successfully' });
+//     } catch (error) {
+//         res.status(500).json({ error: 'Internal Server Error' });
+//     }
+// });
+
+// // Catchall handler: Send back React's index.html file
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, './build/index.html'));
+// });
+
+// // Start the server
+// const PORT = process.env.PORT || 8000;
+// app.listen(PORT, () => {
+//     console.log(`Server running on port ${PORT}`);
+// });
+
+
+
+
+
+require('dotenv').config({ path: './client/.env' });           // Load from client .env
+require('dotenv').config({ path: './server/.env' });   // Load from server .env
 
 const express = require('express');
-const { connectToDatabase } = require('./config/db.js');  
-const Subscriber = require('./models/subscriber.js');     
-
+const { connectToDatabase } = require('./client/config/db.js');
+const Subscriber = require('./client/models/subscriber.js');
 const cors = require('cors');
 const path = require('path');
 
 const app = express();
 
 app.use(express.json());
-
-// CORS Configuration
-app.use(cors({
-    origin: 'https://crisp-shopping-ecom-mern-9uk8vdqfo-dushyant4665s-projects.vercel.app/', // Update this to match your Vercel URL
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-}));
+app.use(cors());
 
 // Connect to the database
 connectToDatabase();
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, './build')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
-// Subscription endpoint
 app.post('/subscribe', async (req, res) => {
     const { email } = req.body;
 
@@ -166,13 +217,14 @@ app.post('/subscribe', async (req, res) => {
     }
 });
 
-// Catchall handler: Send back React's index.html file
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, './build/index.html'));
+    res.sendFile(path.join(__dirname, 'client/build/index.html'));
 });
 
-// Start the server
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
