@@ -2,28 +2,25 @@
   "version": 2,
   "builds": [
     {
-      "src": "client/package.json",
+      "src": "client/dbserver.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "client/build/**",
       "use": "@vercel/static-build",
       "config": {
         "distDir": "client/build"
       }
-    },
-    {
-      "src": "server/index.js",
-      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/server/index.js"
+      "dest": "client/dbserver.js"
     },
     {
       "src": "/(.*)",
-      "dest": "/client/build/$1"
+      "dest": "client/build/$1"
     }
-  ],
-  "env": {
-    "MONGODB_URI": "MONGODB_URI" // Ensure this variable is set in the Vercel dashboard
-  }
+  ]
 }
