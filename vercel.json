@@ -1,4 +1,3 @@
-
 {
   "version": 2,
   "builds": [
@@ -7,21 +6,18 @@
       "use": "@vercel/node"
     },
     {
-      "src": "client/build/**/*",
-      "use": "@vercel/static"
+      "src": "client/build/**",
+      "use": "@vercel/static-build"
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "/client/dbserver.js"
+      "source": "/api/(.*)",
+      "destination": "/client/dbserver.js"
     },
     {
-      "src": "/(.*)",
-      "dest": "/client/build/$1"
+      "source": "/(.*)",
+      "destination": "/client/build/index.html"
     }
-  ],
-  "env": {
-    "MONGODB_URI": "MONGODB_URI"
-  }
+  ]
 }
