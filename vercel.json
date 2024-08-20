@@ -2,19 +2,31 @@
   "version": 2,
   "builds": [
     {
-      "src": "client/dbserver.js",
-      "use": "@vercel/node"
-    },
-    {
       "src": "client/package.json",
       "use": "@vercel/static-build",
-      "config": { "distDir": "client/build" }
+      "config": {
+        "distDir": "client/build"
+      }
+    },
+    {
+      "src": "server/package.json",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": [
+          "server/**/*",
+          "client/build/**/*"
+        ]
+      }
     }
   ],
   "routes": [
     {
+      "src": "/api/(.*)",
+      "dest": "/server/index.js"
+    },
+    {
       "src": "/(.*)",
-      "dest": "/client/dbserver.js"
+      "dest": "/client/build/$1"
     }
   ]
 }
