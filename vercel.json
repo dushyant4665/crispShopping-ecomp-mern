@@ -16,15 +16,14 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "server/index.js"
+      "dest": "/server/index.js"
     },
     {
       "src": "/(.*)",
-      "dest": "client/build/$1"
+      "dest": "/client/build/$1"
     }
   ],
   "env": {
-    "MONGODB_URI": "MONGODB_URI",
-  
+    "MONGODB_URI": "MONGODB_URI" // Ensure this variable is set in the Vercel dashboard
   }
 }
