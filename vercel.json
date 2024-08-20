@@ -2,15 +2,15 @@
   "version": 2,
   "builds": [
     {
-      "src": "client/dbserver.js",
-      "use": "@vercel/node"
-    },
-    {
       "src": "client/package.json",
       "use": "@vercel/static-build",
       "config": {
         "distDir": "build"
       }
+    },
+    {
+      "src": "client/dbserver.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
