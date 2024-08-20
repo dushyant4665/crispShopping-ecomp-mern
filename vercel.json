@@ -12,7 +12,7 @@
   ],
   "routes": [
     {
-      "src": "/subscribe",
+      "src": "/api/subscribe",
       "dest": "client/dbserver.js"
     },
     {
