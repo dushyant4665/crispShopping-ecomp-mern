@@ -21,11 +21,7 @@ const Footer = () => {
         }
     
         try {
-<<<<<<< HEAD
             const response = await fetch('http://localhost:8000/subscribe', {
-=======
-            const response = await fetch('https://crisp-shopping-ecom-mern-9uk8vdqfo-dushyant4665s-projects.vercel.app/subscribe', {
->>>>>>> d0ee6d5740006c6a7ad13f3ce7104724d5018205
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
