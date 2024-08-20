@@ -23,5 +23,8 @@
       "dest": "client/build/$1"
     }
   ],
-
+  "env": {
+    "MONGODB_URI": "MONGODB_URI",
+ 
+  }
 }
