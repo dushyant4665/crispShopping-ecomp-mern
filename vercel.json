@@ -25,6 +25,6 @@
   ],
   "env": {
     "MONGODB_URI": "MONGODB_URI",
-    "OTHER_ENV_VARIABLE": "@other-env-variable"
+  
   }
 }
