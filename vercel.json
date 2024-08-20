@@ -7,17 +7,14 @@
     },
     {
       "src": "client/package.json",
-      "use": "@vercel/static-build"
+      "use": "@vercel/static-build",
+      "config": { "distDir": "client/build" }
     }
   ],
   "routes": [
     {
-      "src": "/subscribe",
-      "dest": "client/dbserver.js"
-    },
-    {
       "src": "/(.*)",
-      "dest": "client/build/$1"
+      "dest": "/client/dbserver.js"
     }
   ]
 }
