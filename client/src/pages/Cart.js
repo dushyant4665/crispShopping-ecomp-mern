@@ -53,7 +53,7 @@ const Cart = () => {
       
       const payment = async (token) => {
         try {
-            const response = await axios.post(`localhost:8000/pay`, {
+            const response = await axios.post(`localhost:8001/pay`, {
                 amount: totalAmt * 100,
                 token: token,
             });
