@@ -1,54 +1,63 @@
+// import React from 'react';
+// // import { search, githubLogo } from '../../public/assets';
+// import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+// import { ToastContainer, toast } from 'react-toastify';
+// import { useDispatch } from 'react-redux';
+// import { addUser, removeUser } from '../redux/crispSlice';
+// import { useNavigate } from 'react-router-dom';
+
 import React from 'react';
-// import { search, githubLogo } from '../../public/assets';
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { ToastContainer, toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { addUser, removeUser } from '../redux/crispSlice';
 import { useNavigate } from 'react-router-dom';
+import { app } from '../firebase.config'; // Import the initialized app
 
 const Login = () => {
     const provider = new GoogleAuthProvider();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const auth = getAuth();
-
+    const auth = getAuth(app); // Use the initialized app here
     const handleLogin = (e) => {
-        e.preventDefault(); // Prevent the default form submission
+      console.log('API Key:', process.env.REACT_APP_FIREBASE_API_KEY);
+console.log('Auth Domain:', process.env.REACT_APP_FIREBASE_AUTH_DOMAIN);
+      e.preventDefault(); // Prevent the default form submission
 // dispatch(console.log(ser.id))
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                const user = result.user;
-                dispatch(addUser({
-                    id: user.uid, // Changed from user.id to user.uid
-                    name: user.displayName,
-                    email: user.email,
-                    image: user.photoURL,
-                }));
+      signInWithPopup(auth, provider)
+          .then((result) => {
+              const user = result.user;
+              dispatch(addUser({
+                  id: user.uid, // Changed from user.id to user.uid
+                  name: user.displayName,
+                  email: user.email,
+                  image: user.photoURL,
+              }));
 
-                setTimeout(() => {
-                    navigate('/');
-                }, 1500);
+              setTimeout(() => {
+                  navigate('/');
+              }, 1500);
 
-                toast.success('Successfully Signed In');
-            })
-            .catch((error) => {
-                console.log(error);
-                toast.error('Sign In Failed');
-            });
-    };
+              toast.success('Successfully Signed In');
+          })
+          .catch((error) => {
+              console.log(error);
+              toast.error('Sign In Failed');
+          });
+  };
 
-    const handleLogOut = () => {
-        const auth =getAuth();
-        signOut(auth)
-            .then(() => {
-                dispatch(removeUser());
-                toast.success('Successfully Signed Out');
-            })
-            .catch((error) => {
-                console.error("Sign Out Error: ", error); // Detailed error logging
-                toast.error('Sign Out Failed');
-            });
-    };
+  const handleLogOut = () => {
+      const auth =getAuth();
+      signOut(auth)
+          .then(() => {
+              dispatch(removeUser());
+              toast.success('Successfully Signed Out');
+          })
+          .catch((error) => {
+              console.error("Sign Out Error: ", error); // Detailed error logging
+              toast.error('Sign Out Failed');
+          });
+  };
   return (
     <div className="w-full flex flex-col items-center justify-center gap-10 py-16 sm:py-24 md:py-32 lg:py-48 xl:py-64">
     <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-8">
@@ -103,6 +112,20 @@ const Login = () => {
   
   
   )
-}
+};
 
-export default Login
+export default Login;
+
+
+
+// const Login = () => {
+//     const provider = new GoogleAuthProvider();
+//     const dispatch = useDispatch();
+//     const navigate = useNavigate();
+//     const auth = getAuth();
+
+ 
+ 
+// }
+
+// export default Login
