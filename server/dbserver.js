@@ -67,7 +67,7 @@ const app = express();
 app.use(express.json());
 const cors = require('cors');
 app.use(cors({
-    origin:  'http://crispshoppingdushyant.vercel.app/', // Allow only the frontend URL
+    origin:  'https://crispshoppingdushyant.vercel.app/', // Allow only the frontend URL
     methods: ['POST'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
