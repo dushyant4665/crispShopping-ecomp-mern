@@ -133,7 +133,7 @@ connectToDatabase();
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 // Route to handle email subscriptions
-app.post('/subscribe', async (req, res) => {
+app.post('/', async (req, res) => {
     const { email } = req.body;
 
     if (!email) {
