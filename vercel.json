@@ -1,48 +1,35 @@
 {
-<<<<<<< HEAD
-   "builds": [
-     {
-       "src": "client/package.json",
-       "use": "@vercel/static-build",
-       "config": {
-         "distDir": "client/build"
-       }
-     },
-     {
-       "src": "server/dbserver.js",
-       "use": "@vercel/node"
-     }
-   ],
-   "routes": [
-     {
-       "src": "/api/(.*)",
-       "dest": "/server/dbserver.js"
-     },
-     {
-       "src": "/(.*)",
-       "dest": "/client/build/$1"
-     }
-   ]
- }
- 
-=======
   "version": 2,
+  "name": "crisp-project",
   "builds": [
-    {
-      "src": "client/dbserver.js",
-      "use": "@vercel/node"
-    },
     {
       "src": "client/package.json",
       "use": "@vercel/static-build",
-      "config": { "distDir": "client/build" }
+      "config": {
+        "distDir": "client/build"
+      }
+    },
+    {
+      "src": "server/dbserver.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "server/index.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
+      "src": "/api/(.*)",
+      "dest": "/server/dbserver.js"
+    },
+    {
       "src": "/(.*)",
-      "dest": "/client/dbserver.js"
+      "dest": "/client/build/$1"
     }
-  ]
+  ],
+  "env": {
+    "MONGODB_URI": "@your-mongodb-uri", 
+    "ANOTHER_ENV_VAR": "@another-env-var"
+  }
 }
->>>>>>> d0ee6d5740006c6a7ad13f3ce7104724d5018205
