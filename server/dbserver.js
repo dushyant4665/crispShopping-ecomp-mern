@@ -58,13 +58,14 @@ require('dotenv').config();
 const express = require('express');
 const { connectToDatabase } = require('./config/db');
 const Subscriber = require('./models/subscriber');
-const cors = require('cors');
+
 const path = require('path');
 
 const app = express();
 
 // Middleware setup
 app.use(express.json());
+const cors = require('cors');
 app.use(cors({
     origin:  'https://crispshoppingdushyant.vercel.app/', // Allow only the frontend URL
     methods: ['POST'],
