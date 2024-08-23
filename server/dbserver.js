@@ -53,23 +53,77 @@
 
 
 
-require('dotenv').config();
+// require('dotenv').config();
+
+// const express = require('express');
+// const { connectToDatabase } = require('./config/db');
+// const Subscriber = require('./models/subscriber');
+
+// const path = require('path');
+
+// const app = express();
+
+// // Middleware setup
+// app.use(express.json());
+// const cors = require('cors');
+// app.use(cors({
+//     origin:  'https://crispshoppingdushyant.vercel.app', // Allow only the frontend URL
+//     // methods: ['POST'],
+//     // allowedHeaders: ['Content-Type', 'Authorization']
+// }));
+
+// // Connect to the database
+// connectToDatabase();
+
+// // Serve static files from the React app
+// app.use(express.static(path.join(__dirname, '../client/build')));
+
+// // Route to handle email subscriptions
+// app.post('/subscribe', async (req, res) => {
+//     const { email } = req.body;
+
+//     if (!email) {
+//         return res.status(400).json({ error: 'Email is required' });
+//     }
+
+//     try {
+//         const subscriber = new Subscriber({ email });
+//         await subscriber.save();
+//         res.status(200).json({ message: 'Subscribed successfully' });
+//     } catch (error) {
+//         console.error('Error during subscription:', error);
+//         res.status(500).json({ error: 'Internal Server Error' });
+//     }
+// });
+
+// // Catch-all route for client-side routing
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../client/build/index.html'));
+// });
+
+// // Start the server
+// const PORT = process.env.PORT || 8000;
+// app.listen(PORT, () => {
+//     console.log(`Server running on port ${PORT}`);
+// });
+
 
 const express = require('express');
-const { connectToDatabase } = require('./config/db');
-const Subscriber = require('./models/subscriber');
-
+const { connectToDatabase } = require('./config/db.js');  // Updated path
+const Subscriber = require('./models/subscriber.js');  // Updated path
+const cors = require('cors');
 const path = require('path');
 
 const app = express();
 
 // Middleware setup
 app.use(express.json());
-const cors = require('cors');
+
+// Correctly configure CORS to allow your frontend to access the backend
 app.use(cors({
-    origin:  'https://crispshoppingdushyant.vercel.app', // Allow only the frontend URL
-    // methods: ['POST'],
-    // allowedHeaders: ['Content-Type', 'Authorization']
+    origin: 'https://crispshoppingdushyant.vercel.app', // Your frontend URL
+    methods: ['POST'], // Allowed methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
 }));
 
 // Connect to the database
@@ -91,7 +145,6 @@ app.post('/subscribe', async (req, res) => {
         await subscriber.save();
         res.status(200).json({ message: 'Subscribed successfully' });
     } catch (error) {
-        console.error('Error during subscription:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
@@ -101,9 +154,9 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
-// Start the server
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
 
