@@ -29,7 +29,6 @@
     }
   ],
   "env": {
-    "MONGODB_URI": "@your-mongodb-uri", 
-    "ANOTHER_ENV_VAR": "@another-env-var"
+  
   }
 }
