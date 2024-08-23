@@ -13,7 +13,7 @@ const Footer = () => {
     const handleSubscribe = async () => {
        
             
-    console.log('MONGODB_URI:', process.env.MONGODB_URI);
+    // console.log('MONGODB_URI:', process.env.MONGODB_URI);
 
         if (!isValidEmail(email)) {
             toast.error('Invalid email address');
