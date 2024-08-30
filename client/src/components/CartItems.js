@@ -54,7 +54,7 @@ const CartItems = () => {
       <Link to='/'>
         <div className="flex items-center">
           <HiOutlineArrowLeft className="mr-2" />
-          <p className='text-lg'>Go to Shopping</p>
+          <p className='text-lg'>Go to Shop</p>
         </div>
       </Link>
     </div>
