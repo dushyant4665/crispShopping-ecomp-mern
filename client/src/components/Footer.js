@@ -6,7 +6,7 @@ const Footer = () => {
     const [email, setEmail] = useState('');
 
     const isValidEmail = (email) => {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Improved regex for email validation
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
         return re.test(email);
     };
 
