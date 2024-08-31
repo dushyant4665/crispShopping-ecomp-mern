@@ -1,30 +1,27 @@
 
 
 const express = require('express');
-const { connectToDatabase } = require('./config/db.js');  // Updated path
-const Subscriber = require('./models/subscriber.js');  // Updated path
+const { connectToDatabase } = require('./config/db.js'); 
+const Subscriber = require('./models/subscriber.js');  
 const cors = require('cors');
 const path = require('path');
 
 const app = express();
 
-// Middleware setup
 app.use(express.json());
 
-// Correctly configure CORS to allow your frontend to access the backend
 app.use(cors({
-    origin: 'https://crispshoppingdushyant.vercel.app/subscribe', // Your frontend URL
-    methods: ['POST','PUT'], // Allowed methods
-    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+    origin: 'https://crispshoppingdushyant.vercel.app/subscribe',
+    methods: ['POST','PUT'], 
+    allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-// Connect to the database
 connectToDatabase();
 
-// Serve static files from the React app
+
 app.use(express.static(path.join(__dirname, '../client/build')));
 
-// Route to handle email subscriptions
+
 app.post('/subscribe', async (req, res) => {
     const { email } = req.body;
 
@@ -41,7 +38,7 @@ app.post('/subscribe', async (req, res) => {
     }
 });
 
-// Catch-all route for client-side routing
+
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
