@@ -1,10 +1,4 @@
-// import React from 'react';
-// // import { search, githubLogo } from '../../public/assets';
-// import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
-// import { ToastContainer, toast } from 'react-toastify';
-// import { useDispatch } from 'react-redux';
-// import { addUser, removeUser } from '../redux/crispSlice';
-// import { useNavigate } from 'react-router-dom';
+
 
 import React from 'react';
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
@@ -12,23 +6,23 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { addUser, removeUser } from '../redux/crispSlice';
 import { useNavigate } from 'react-router-dom';
-import { app } from '../firebase.config'; // Import the initialized app
+import { app } from '../firebase.config';
 
 const Login = () => {
     const provider = new GoogleAuthProvider();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const auth = getAuth(app); // Use the initialized app here
+    const auth = getAuth(app); 
     const handleLogin = (e) => {
       console.log('API Key:', process.env.REACT_APP_FIREBASE_API_KEY);
 console.log('Auth Domain:', process.env.REACT_APP_FIREBASE_AUTH_DOMAIN);
-      e.preventDefault(); // Prevent the default form submission
+      e.preventDefault(); 
 // dispatch(console.log(ser.id))
       signInWithPopup(auth, provider)
           .then((result) => {
               const user = result.user;
               dispatch(addUser({
-                  id: user.uid, // Changed from user.id to user.uid
+                  id: user.uid,
                   name: user.displayName,
                   email: user.email,
                   image: user.photoURL,
@@ -54,7 +48,7 @@ console.log('Auth Domain:', process.env.REACT_APP_FIREBASE_AUTH_DOMAIN);
               toast.success('Successfully Signed Out');
           })
           .catch((error) => {
-              console.error("Sign Out Error: ", error); // Detailed error logging
+              console.error("Sign Out Error: ", error);
               toast.error('Sign Out Failed');
           });
   };
