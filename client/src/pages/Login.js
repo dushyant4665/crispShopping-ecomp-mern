@@ -13,33 +13,34 @@ const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const auth = getAuth(app); 
-    const handleLogin = (e) => {
-      // console.log('API Key:', process.env.REACT_APP_FIREBASE_API_KEY);
-// console.log('Auth Domain:', process.env.REACT_APP_FIREBASE_AUTH_DOMAIN);
-      e.preventDefault(); 
-console.log('user deatil :' user)
-// dispatch(console.log(ser.id))
-      signInWithPopup(auth, provider)
-          .then((result) => {
-              const user = result.user;
-              dispatch(addUser({
-                  id: user.uid,
-                  name: user.displayName,
-                  email: user.email,
-                  image: user.photoURL,
-              }));
+const handleLogin = (e) => {
+    e.preventDefault();
+    
+    signInWithPopup(auth, provider)
+        .then((result) => {
+            const user = result.user;
 
-              setTimeout(() => {
-                  navigate('/');
-              }, 1500);
+      
+            console.log('User Details:', user);
 
-              toast.success('Successfully Signed In');
-          })
-          .catch((error) => {
-              console.log(error);
-              toast.error('Sign In Failed');
-          });
-  };
+            dispatch(addUser({
+                id: user.uid,
+                name: user.displayName,
+                email: user.email,
+                image: user.photoURL,
+            }));
+
+            setTimeout(() => {
+                navigate('/');
+            }, 1500);
+
+            toast.success('Successfully Signed In');
+        })
+        .catch((error) => {
+            console.log(error);
+            toast.error('Sign In Failed');
+        });
+};
 
   const handleLogOut = () => {
       const auth =getAuth();
