@@ -17,7 +17,7 @@ const Login = () => {
       // console.log('API Key:', process.env.REACT_APP_FIREBASE_API_KEY);
 // console.log('Auth Domain:', process.env.REACT_APP_FIREBASE_AUTH_DOMAIN);
       e.preventDefault(); 
-// dispatch(console.log(ser.id))
+dispatch(console.log(ser.id))
       signInWithPopup(auth, provider)
           .then((result) => {
               const user = result.user;
