@@ -6,7 +6,7 @@ const Banner = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const data = [
     'https://amazonclone.reactbd.com/static/media/bannerImgOne.efb3d39101f7ef77d616.jpg',
-    'https://amazonclone.reactbd.com/static/media/bannerImgTwo.bc1bdb910ead16c65197.jpg',
+    'https://template.canva.com/EAE_v1OE_TQ/1/0/800w-JLbG4ittFjI.jpg',
     'https://thomasandvine.com/cdn/shop/files/TV_LNCH_WatsonVentura_SiteAssets-homepage_desktop_a_26d9ef0c-0d6c-42fa-891c-f23f48068713_1920x.jpg?v=1704232960',
     'https://inego.in/cdn/shop/files/Instagram_post_-_1banner_4.png?v=1702011275&width=1800',
   ];
