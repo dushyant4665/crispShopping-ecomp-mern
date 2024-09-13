@@ -21,13 +21,13 @@ const Footer = () => {
         }
     
         try {
-            const response = await fetch('https://crisp-shopping-ecomp-mern-backend.vercel.app/subscribe', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email }),
-            })
+           const response = await fetch('https://crispshopping-mern-backend.vercel.app/subscribe', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email }),
+});
             
     
             if (!response.ok) {  
