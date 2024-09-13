@@ -10,11 +10,14 @@ const app = express();
 
 app.use(express.json());
 
+
+const cors = require('cors');
 app.use(cors({
-    origin: 'https://crispshopping-mern-project-dushyant.vercel.app/subscribe',
-    methods: ['POST','PUT'], 
+    origin: 'https://crispshopping-mern-project-dushyant.vercel.app', // Allow entire frontend domain
+    methods: ['POST', 'PUT'],
     allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+
 
 connectToDatabase();
 
