@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-    origin: 'https://crispshoppingdushyant.vercel.app/subscribe',
+    origin: 'https://crispshopping-mern-project-dushyant.vercel.app/subscribe',
     methods: ['POST','PUT'], 
     allowedHeaders: ['Content-Type', 'Authorization'],
 }));
