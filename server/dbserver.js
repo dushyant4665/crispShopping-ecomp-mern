@@ -13,7 +13,7 @@ app.use(express.json());
 
 const cors = require('cors');
 app.use(cors({
-    origin: 'https://crispshopping-mern-project-dushyant.vercel.app', // Allow entire frontend domain
+    origin: 'https://crispshopping-mern-project-dushyant.vercel.app',
     methods: ['POST', 'PUT'],
     allowedHeaders: ['Content-Type', 'Authorization'],
 }));
