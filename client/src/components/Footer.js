@@ -1,48 +1,47 @@
 import React, { useState } from 'react';
 import { FaGithub, FaFacebook, FaTwitter, FaInstagram, FaHome } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import { api } from '../api/config';
 
 const Footer = () => {
     const [email, setEmail] = useState('');
+    const [isSubscribing, setIsSubscribing] = useState(false);
 
     const isValidEmail = (email) => {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
         return re.test(email);
     };
 
-    const handleSubscribe = async () => {
-       
-            
-    // console.log('MONGODB_URI:', process.env.MONGODB_URI);
-
-        if (!isValidEmail(email)) {
-            toast.error('Invalid email address');
+    const handleSubscribe = async (e) => {
+        e.preventDefault(); // Prevent form submission
+        
+        if (!email.trim()) {
+            toast.error('Please enter an email address');
             return;
         }
-    
+
+        if (!isValidEmail(email)) {
+            toast.error('Please enter a valid email address');
+            return;
+        }
+
+        setIsSubscribing(true);
         try {
-           const response = await fetch('https://crispshopping-mern-backend.vercel.app/subscribe', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ email }),
-});
-            
-    
-            if (!response.ok) {  
-                throw new Error('Failed to subscribe');
+            const response = await api.post('/subscribe', { email: email.trim().toLowerCase() });
+            if (response.data.success) {
+                toast.success('Thanks for subscribing!');
+                setEmail('');
+            } else {
+                throw new Error(response.data.message || 'Subscription failed');
             }
-    
-            toast.success('Thanks for subscribing!');
-            setEmail('');
         } catch (error) {
-            console.error('Error during subscription:', error);
-            toast.error('An error occurred during subscription');
+            console.error('Subscription error:', error);
+            const errorMessage = error.message || 'Failed to subscribe. Please try again.';
+            toast.error(errorMessage);
+        } finally {
+            setIsSubscribing(false);
         }
     };
-
-
 
     return (
         <div>
@@ -77,13 +76,17 @@ const Footer = () => {
                                 placeholder='Email'
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
+                                disabled={isSubscribing}
                                 required
                             />
                             <button
-                                className='text-sm border text-white border-t-0 hover:bg-gray-900 active:bg-white active:text-black'
+                                className={`text-sm border text-white border-t-0 hover:bg-gray-900 active:bg-white active:text-black ${
+                                    isSubscribing ? 'opacity-50 cursor-not-allowed' : ''
+                                }`}
                                 onClick={handleSubscribe}
+                                disabled={isSubscribing}
                             >
-                                Subscribe
+                                {isSubscribing ? 'Subscribing...' : 'Subscribe'}
                             </button>
                         </div>
                     </div>

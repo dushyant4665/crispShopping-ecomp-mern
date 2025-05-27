@@ -8,9 +8,9 @@ import { motion } from "framer-motion";
 // import {  artAtCart01, emptyCart } from '../../public/assets/index';
 import CartItems from '../components/CartItems';
 import { ToastContainer, toast } from 'react-toastify';
-import axios from 'axios';
 import StripeCheckout from 'react-stripe-checkout';
 import { Store } from 'react-notifications-component';
+import { stripeApi } from '../api/config';
 import 'react-notifications-component/dist/theme.css';
 
 const Cart = () => {
@@ -47,25 +47,45 @@ const Cart = () => {
   }, [productData]);
 
   const handleCheckOut = () => {
-    if (userInfo) {
-      setPayNow(true);
-      proceedToCheckOut();
-      
-      const payment = async (token) => {
-        try {
-            const response = await axios.post(`localhost:8001/pay`, {
-                amount: totalAmt * 100,
-                token: token,
-            });
-          console.log('Payment response:', response.data);
-        } catch (error) {
-          console.error('Error making payment:', error);
-        }
-      };
-  
-      console.log(payment);
-    } else {
+    if (!userInfo) {
       toast.error('Please sign in to Checkout');
+      return;
+    }
+
+    if (totalAmt <= 0) {
+      toast.error('Your cart is empty');
+      return;
+    }
+
+    setPayNow(true);
+    proceedToCheckOut();
+  };
+
+  const handlePayment = async (token) => {
+    try {
+      const response = await stripeApi.post('/pay', {
+        amount: Math.round(totalAmt * 100), // Convert to cents and ensure integer
+        token: token,
+        email: userInfo.email,
+        items: productData.map(item => ({
+          id: item.id,
+          quantity: item.quantity,
+          price: item.price
+        }))
+      });
+
+      if (response.data.success) {
+        toast.success('Payment successful!');
+        dispatch(resetCart());
+        setPayNow(false);
+      } else {
+        throw new Error(response.data.message || 'Payment failed');
+      }
+    } catch (error) {
+      console.error('Payment error:', error);
+      const errorMessage = error.response?.data?.message || 'Payment failed. Please try again.';
+      toast.error(errorMessage);
+      setPayNow(false);
     }
   };
 
@@ -110,13 +130,16 @@ const Cart = () => {
                     {payNow && (
                       <div className="w-full mt-4 flex items-center justify-center">
                         <StripeCheckout
-                          stripeKey="pk_test_51PjnSYC9ZNLV42Mr66ipvV27uX3luDBXVpsjcoNqlMaRr3HaSkK3Ei3xhKWPZAIqpGDXSBLCOKizLICmspYIVTFd00KZemZ6Tl"
-                          name="crisp shopping app"
-                          amount={totalAmt * 100}
-                          label="Pay to Crisp"
-                          description={`Your payment amount is ${totalAmt}`}
+                          stripeKey={process.env.REACT_APP_STRIPE_PUBLIC_KEY}
+                          name="Crisp Shopping"
+                          amount={Math.round(totalAmt * 100)}
+                          currency="USD"
+                          token={handlePayment}
+                          label="Pay with Stripe"
+                          description={`Your total amount is $${totalAmt}`}
                           email={userInfo.email}
-                          onClick={proceedToCheckOut}
+                          shippingAddress
+                          billingAddress
                         />
                       </div>
                     )}
