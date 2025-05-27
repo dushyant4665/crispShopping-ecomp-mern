@@ -9,15 +9,6 @@ A full-stack e-commerce platform built with the MERN stack, featuring a sleek de
   - Smooth animations and transitions
   - Real-time cart updates
   - Intuitive product browsing
-  - Dark mode support
-
-- **Shopping Features**
-  - Product catalog with categories
-  - Smart search functionality
-  - Shopping cart management
-  - Secure checkout process
-  - Order tracking
-  - Email subscriptions for updates
 
 ## 🛠️ Tech Stack
 
