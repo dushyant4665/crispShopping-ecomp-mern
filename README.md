@@ -27,7 +27,6 @@ A full-stack e-commerce platform built with the MERN stack, featuring a sleek de
 - **Express.js** - Web framework
 - **MongoDB** - Database
 - **Mongoose** - Database modeling
-- **JWT** - Authentication
 - **Stripe API** - Payment gateway
 - **Nodemon** - Development server
 
@@ -35,7 +34,7 @@ A full-stack e-commerce platform built with the MERN stack, featuring a sleek de
 - **Git** - Version control
 - **VS Code** - Code editor
 - **Postman** - API testing
-- **MongoDB Compass** - Database management
+- **MongoDB Atlas** - Database management
 - **Chrome DevTools** - Debugging
 
 ### Installation
