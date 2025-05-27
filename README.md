@@ -19,13 +19,6 @@ A full-stack e-commerce platform built with the MERN stack, featuring a sleek de
   - Order tracking
   - Email subscriptions for updates
 
-- **Security & Performance**
-  - Secure user authentication
-  - Protected payment processing
-  - Data encryption
-  - Optimized image loading
-  - Fast page loads
-
 ## 🛠️ Tech Stack
 
 ### Frontend
@@ -53,14 +46,6 @@ A full-stack e-commerce platform built with the MERN stack, featuring a sleek de
 - **Postman** - API testing
 - **MongoDB Compass** - Database management
 - **Chrome DevTools** - Debugging
-
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js (v14 or higher)
-- MongoDB
-- Git
-- Stripe account (for payments)
 
 ### Installation
 
@@ -144,10 +129,6 @@ REACT_APP_STRIPE_PUBLIC_KEY=your_stripe_public_key
 - CORS protection
 - Input validation
 - Secure password hashing
-- JWT authentication
-- Rate limiting
-- XSS protection
-- CSRF protection
 
 ## 🚀 Deployment
 
@@ -155,7 +136,6 @@ REACT_APP_STRIPE_PUBLIC_KEY=your_stripe_public_key
 1. Set up MongoDB Atlas
 2. Configure environment variables
 3. Deploy to Vercel/Heroku
-4. Set up SSL certificate
 
 ### Frontend Deployment
 1. Build the React app
@@ -163,31 +143,7 @@ REACT_APP_STRIPE_PUBLIC_KEY=your_stripe_public_key
 3. Configure environment variables
 4. Set up custom domain
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## 👨‍💻 Author
 
 Dushyant Khandelwal
 - Email: dushyantkhandelwal4665@gmail.com
-- GitHub: [Your GitHub Profile]
-
-## 🙏 Acknowledgments
-
-- React.js community
-- MongoDB team
-- Stripe documentation
-- All contributors and supporters
-
----
-
-Made with ❤️ by Dushyant Khandelwal 
