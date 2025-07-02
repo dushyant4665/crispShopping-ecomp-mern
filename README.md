@@ -1,4 +1,4 @@
-# Crisp Shopping - Modern E-Commerce Platform 🛍️
+# Crisp Shopping - Modern E-Commerce Platform 
 
 A full-stack e-commerce platform built with the MERN stack, featuring a sleek design, secure payments, and real-time updates. This project demonstrates modern web development practices while maintaining simplicity and user-friendliness.
 
