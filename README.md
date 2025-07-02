@@ -2,7 +2,7 @@
 
 A full-stack e-commerce platform built with the MERN stack, featuring a sleek design, secure payments, and real-time updates. This project demonstrates modern web development practices while maintaining simplicity and user-friendliness.
 
-## 🌟 Features
+##  Features
 
 - **User Experience**
   - Responsive design that works on all devices
@@ -10,7 +10,7 @@ A full-stack e-commerce platform built with the MERN stack, featuring a sleek de
   - Real-time cart updates
   - Intuitive product browsing
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Frontend
 - **React.js** - User interface library
@@ -66,7 +66,7 @@ A full-stack e-commerce platform built with the MERN stack, featuring a sleek de
    npm start
    ```
 
-## 📦 Project Structure
+##  Project Structure
 
 ```
 crispShopping-ecomp-mern/
@@ -102,7 +102,7 @@ REACT_APP_API_URL=http://localhost:8000
 REACT_APP_STRIPE_PUBLIC_KEY=your_stripe_public_key
 ```
 
-## 🛠️ Available Scripts
+##  Available Scripts
 
 ### Backend
 - `npm run dev` - Start development server
@@ -114,13 +114,13 @@ REACT_APP_STRIPE_PUBLIC_KEY=your_stripe_public_key
 - `npm build` - Build for production
 - `npm test` - Run tests
 
-## 🔒 Security Features
+##  Security Features
 
 - CORS protection
 - Input validation
 - Secure password hashing
 
-## 🚀 Deployment
+##  Deployment
 
 ### Backend Deployment
 1. Set up MongoDB Atlas
@@ -133,7 +133,7 @@ REACT_APP_STRIPE_PUBLIC_KEY=your_stripe_public_key
 3. Configure environment variables
 4. Set up custom domain
 
-## 👨‍💻 Author
+##  Author
 
 Dushyant Khandelwal
 - Email: dushyantkhandelwal4665@gmail.com
